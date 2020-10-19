@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FullEntity } from 'src/app/models/FullEntity';
 import { GuildService } from '../../services/guild.service';
 
 @Component({
@@ -12,21 +13,45 @@ export class FullComponent implements OnInit {
   private gridColumnApi;
 
   private GuildService: GuildService;
-  public Values = [
-    {header: "headerValue1",value: "valueValue1"},
-    {header: "headerValue2",value: "valueValue2"}
-  ]
+  public FullData: FullEntity[] = [];
   public Columns = [
     {
-      headerName: "Column1",
+      headerName: "Player1",
+      field: "Player1",
       type: "text",
-      field: "header"
     },
     {
-      headerName: "Column2",
+      headerName: "Player2",
+      field: "Player2",
       type: "text",
-      field: "value"
-    }
+    },
+    {
+      headerName: "Player3",
+      field: "Player3",
+      type: "text",
+    },
+    {
+      headerName: "Player4",
+      field: "Player4",
+      type: "text",
+    },
+    {
+      headerName: "Player5",
+      field: "Player5",
+      type: "text",
+    },
+    {
+      headerName: "Wins",
+      field: "Wins",
+      type: "number",
+      sortable: true
+    },
+    {
+      headerName: "Looses",
+      field: "Looses",
+      type: "number",
+      sortable: true
+    },
   ]
   public ColDef = {
     flex: 1,
@@ -39,6 +64,7 @@ export class FullComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.FullData = this.GuildService.FullData;
   }
 
   onGridReady(params) {
