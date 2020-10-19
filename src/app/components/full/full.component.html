@@ -1,3 +1,15 @@
 <p>
-  full works!
+  Full Data for guild {{GuildService.GuildId}}
 </p>
+
+<div class="gridWrapper">
+  <ag-grid-angular
+    #agGrid
+    class="ag-theme-alpine"
+    [rowData]="Values"
+    [columnDefs]="Columns"
+    [defaultColDef]="ColDef"
+    (gridReady)="onGridReady($event)"
+  >
+  </ag-grid-angular>
+</div>

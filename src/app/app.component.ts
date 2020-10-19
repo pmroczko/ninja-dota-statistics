@@ -12,4 +12,8 @@ export class AppComponent {
   public form: FormGroup = new FormGroup({
     guildId: new FormControl('1234'),
   });
+
+  onSubmit(guildId) {
+    console.warn(`Submit with id ${guildId}`);
+  }
 }

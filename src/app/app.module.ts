@@ -9,6 +9,7 @@ import {FullComponent } from './components/full/full.component'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { DemoMaterialModule } from './material.module';
+import { AgGridModule } from 'ag-grid-angular';
 
 
 const appRoutes: Routes = [
@@ -33,7 +34,8 @@ const appRoutes: Routes = [
     AppRoutingModule,
     DemoMaterialModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AgGridModule
   ],
   providers: [],
   bootstrap: [AppComponent]

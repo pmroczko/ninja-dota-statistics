@@ -1,9 +1,4 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-</div>
+
 <mat-toolbar color="primary">
   <mat-toolbar-row>
     <span class="menu-spacer"></span>
@@ -12,12 +7,12 @@
       <a mat-button [routerLink]="'/full'" routerLinkActive="mat-accent"> Full </a>
     </div>
     <span class="toolbar-right-separator"></span>
-    <form [formGroup]="form">
+    <form [formGroup]="form" (ngSubmit)="onSubmit(form.value.guildId)">
       <mat-form-field floatLabel="never">
         <mat-label >Guild ID</mat-label>
         <input matInput formControlName = "guildId">
       </mat-form-field>
-      <button mat-raised-button  color="accent">Download Data</button>
+      <button mat-raised-button color="accent" type="submit">Download Data</button>
     </form>
   </mat-toolbar-row>
 </mat-toolbar>
