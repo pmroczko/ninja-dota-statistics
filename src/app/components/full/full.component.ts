@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FullEntity } from 'src/app/models/FullEntity';
+import { FullEntity } from 'src/app/models/fullEntity';
 import { GuildService } from '../../services/guild.service';
 
 @Component({
@@ -49,6 +49,12 @@ export class FullComponent implements OnInit {
     {
       headerName: "Looses",
       field: "Looses",
+      type: "number",
+      sortable: true
+    },
+    {
+      headerName: "WinLooseRatio",
+      field: "WinLooseRatio",
       type: "number",
       sortable: true
     },

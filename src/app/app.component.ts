@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { AppConst } from './appConst';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,7 @@ export class AppComponent {
   title = 'Ninja Dota Statistics';
 
   public form: FormGroup = new FormGroup({
-    guildId: new FormControl('1234'),
+    guildId: new FormControl(AppConst.DEFAULT_GUILD_ID),
   });
 
   onSubmit(guildId) {

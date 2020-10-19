@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { FullEntity } from '../models/FullEntity';
+import { FullEntity } from '../models/fullEntity';
+import * as EXAMPLE from '../../dota_example.json';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class GuildService {
         return "";
       return `${e[0]} ${e[1]}`
     }
-    return this.DemoData.payload.map(e => {
+    return EXAMPLE.payload.map(e => {
       let ret: FullEntity = new FullEntity;
       let players = e[0];
       let score = e[1];
@@ -24,11 +25,12 @@ export class GuildService {
       ret.Player5 = parsePlayer(players[4]);
       ret.Wins = +score['wins'];
       ret.Looses = +score['looses'];
+      ret.WinLooseRatio = Math.round(100*ret.Wins / ret.Looses)/100;
       return ret;
     })
   }
   constructor() {
-    this.GuildId = this.DemoData["guild_id"];
+    this.GuildId = EXAMPLE["guild_id"];
     this.FullData = this.ParseFullData();
   }
 
@@ -96,6 +98,4 @@ export class GuildService {
       ],
     ]
   }
-
-  public GuildId = "316887";
 }
