@@ -1,12 +1,21 @@
 import { Injectable } from '@angular/core';
 import { FullEntity } from '../models/fullEntity';
 import * as EXAMPLE from '../../dota_example.json';
+import { HttpClient } from '@angular/common/http';
+import { AppConst } from '../appConst';
+
+import axios from "axios";
+import { AxiosInstance } from "axios";
+import { ErrorHandler } from "@angular/core";
 
 @Injectable({
   providedIn: 'root'
 })
-export class GuildService {
 
+export class GuildService {
+	private axiosClient: AxiosInstance;
+  private errorHandler: ErrorHandler;
+  
   private ParseFullData(): FullEntity[] {
 
     const parsePlayer = (e): any => {
@@ -29,73 +38,44 @@ export class GuildService {
       return ret;
     })
   }
-  constructor() {
+  constructor(errorHandler: ErrorHandler) {
+    this.errorHandler = errorHandler;
+ 
+		// The ApiClient wraps calls to the underlying Axios client.
+		this.axiosClient = axios.create({
+			timeout: 3000,
+			headers: {
+        "X-Initialized-At": Date.now().toString(),
+        "Access-Control-Allow-Origin": "*"
+			}
+		});
+    this.FullData = [];
+  }
+
+
+  public async GetData() {
+    try {
+ 
+			var axiosResponse = await this.axiosClient.request<any>({
+				method: "get",
+				url: AppConst.FULL_URL,
+				params: []
+      });
+      this.FullData = axiosResponse.data;
+ 
+		} catch ( error ) {
+ 
+			console.error("Communication error: "+error)
+ 
+		}
+  }
+
+  private LoadDemoData() {
     this.GuildId = EXAMPLE["guild_id"];
-    this.FullData = this.ParseFullData();
+    this.FullData = this.ParseFullData();    
   }
 
   public GuildId = "unknown";
   public FullData: FullEntity[] = [];
 
-  public DemoData = {
-    "guild_id": "316887",
-    "payload": [
-      [
-        [
-          [
-            "Bixkog",
-            "Initiator"
-          ],
-          [
-            "Dragon",
-            "Nuker"
-          ],
-          [
-            "Spawek",
-            "Pusher"
-          ]
-        ],
-        {
-          "looses": 5,
-          "wins": 28
-        }
-      ],
-      [
-        [
-          [
-            "Bixkog",
-            "Escape"
-          ],
-          [
-            "Dragon",
-            "Nuker"
-          ],
-          [
-            "Spawek",
-            "Pusher"
-          ]
-        ],
-        {
-          "looses": 7,
-          "wins": 28
-        }
-      ],
-      [
-        [
-          [
-            "Bixkog",
-            "Disabler"
-          ],
-          [
-            "goovie",
-            "Initiator"
-          ]
-        ],
-        {
-          "looses": 8,
-          "wins": 28
-        }
-      ],
-    ]
-  }
 }

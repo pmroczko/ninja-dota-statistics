@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import {FullComponent } from './components/full/full.component'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { DemoMaterialModule } from './material.module';
 import { AgGridModule } from 'ag-grid-angular';
@@ -35,6 +36,7 @@ const appRoutes: Routes = [
     DemoMaterialModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
     AgGridModule
   ],
   providers: [],

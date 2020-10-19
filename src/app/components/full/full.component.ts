@@ -70,7 +70,9 @@ export class FullComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.FullData = this.GuildService.FullData;
+    this.GuildService.GetData().then(() => {
+      this.FullData = this.GuildService.FullData;
+    })
   }
 
   onGridReady(params) {
