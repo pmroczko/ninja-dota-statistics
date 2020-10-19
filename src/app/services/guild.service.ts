@@ -3,27 +3,23 @@ import { FullEntity } from '../models/fullEntity';
 import * as EXAMPLE from '../../dota_example.json';
 import { HttpClient } from '@angular/common/http';
 import { AppConst } from '../appConst';
-
-import axios from "axios";
-import { AxiosInstance } from "axios";
-import { ErrorHandler } from "@angular/core";
+import { Subscription } from 'rxjs';
+import { Observable } from 'rxjs/internal/Observable';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class GuildService {
-	private axiosClient: AxiosInstance;
-  private errorHandler: ErrorHandler;
   
-  private ParseFullData(): FullEntity[] {
+  private ParseFullData(data): FullEntity[] {
 
     const parsePlayer = (e): any => {
       if (!e)
         return "";
       return `${e[0]} ${e[1]}`
     }
-    return EXAMPLE.payload.map(e => {
+    return data.payload.map(e => {
       let ret: FullEntity = new FullEntity;
       let players = e[0];
       let score = e[1];
@@ -38,41 +34,18 @@ export class GuildService {
       return ret;
     })
   }
-  constructor(errorHandler: ErrorHandler) {
-    this.errorHandler = errorHandler;
- 
-		// The ApiClient wraps calls to the underlying Axios client.
-		this.axiosClient = axios.create({
-			timeout: 3000,
-			headers: {
-        "X-Initialized-At": Date.now().toString(),
-        "Access-Control-Allow-Origin": "*"
-			}
-		});
+  constructor(private httpClient: HttpClient) {
     this.FullData = [];
   }
 
 
-  public async GetData() {
-    try {
- 
-			var axiosResponse = await this.axiosClient.request<any>({
-				method: "get",
-				url: AppConst.FULL_URL,
-				params: []
-      });
-      this.FullData = axiosResponse.data;
- 
-		} catch ( error ) {
- 
-			console.error("Communication error: "+error)
- 
-		}
+  public ParseData(data) {
+    this.FullData = this.ParseFullData(data);
+    this.GuildId = data["guild_id"]
   }
 
-  private LoadDemoData() {
-    this.GuildId = EXAMPLE["guild_id"];
-    this.FullData = this.ParseFullData();    
+  public GetData(): Observable<any> {
+    return this.httpClient.get(AppConst.FULL_URL);
   }
 
   public GuildId = "unknown";

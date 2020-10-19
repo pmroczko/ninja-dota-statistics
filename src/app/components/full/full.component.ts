@@ -43,19 +43,16 @@ export class FullComponent implements OnInit {
     {
       headerName: "Wins",
       field: "Wins",
-      type: "number",
       sortable: true
     },
     {
       headerName: "Looses",
       field: "Looses",
-      type: "number",
       sortable: true
     },
     {
       headerName: "WinLooseRatio",
       field: "WinLooseRatio",
-      type: "integer",
       sortable: true
     },
   ]
@@ -70,9 +67,11 @@ export class FullComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.GuildService.GetData().then(() => {
+    this.GuildService.GetData().subscribe((data) => {
+      this.GuildService.ParseData(data);
       this.FullData = this.GuildService.FullData;
-    })
+      console.log("Request success!");
+    });
   }
 
   onGridReady(params) {
