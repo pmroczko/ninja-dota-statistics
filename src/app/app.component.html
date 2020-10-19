@@ -6,15 +6,19 @@
 </div>
 <mat-toolbar color="primary">
   <mat-toolbar-row>
-    <!--<button mat-icon-button>
-      <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
-    </button>
-    <h1>SimpleCRM</h1>-->
     <span class="menu-spacer"></span>
     <div>
       <a mat-button [routerLink]="'/home'" routerLinkActive="mat-accent"> Home </a>
-      <a mat-button [routerLink]="'/general'" routerLinkActive="mat-accent"> General </a>
+      <a mat-button [routerLink]="'/full'" routerLinkActive="mat-accent"> Full </a>
     </div>
+    <span class="toolbar-right-separator"></span>
+    <form [formGroup]="form">
+      <mat-form-field floatLabel="never">
+        <mat-label >Guild ID</mat-label>
+        <input matInput formControlName = "guildId">
+      </mat-form-field>
+      <button mat-raised-button  color="accent">Download Data</button>
+    </form>
   </mat-toolbar-row>
 </mat-toolbar>
 <router-outlet></router-outlet>

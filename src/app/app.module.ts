@@ -4,16 +4,16 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './components/home/home.component';
+import {FullComponent } from './components/full/full.component'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { MatToolbarModule, MatIconModule, MatSidenavModule, MatListModule, MatButtonModule } from  '@angular/material';
-import { GeneralComponent } from './components/general/general.component';
+import { DemoMaterialModule } from './material.module';
 
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
-  { path: 'general', component: GeneralComponent},
+  { path: 'full', component: FullComponent},
   { path: '',   redirectTo: '/home', pathMatch: 'full' },
 ]
 
@@ -21,7 +21,7 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     HomeComponent,
-    GeneralComponent
+    FullComponent
   ],
   imports: [
     RouterModule.forRoot(
@@ -31,12 +31,9 @@ const appRoutes: Routes = [
     ),
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule,
-    MatToolbarModule,
-    MatSidenavModule,
-    MatListModule,
-    MatButtonModule,
-    MatIconModule
+    DemoMaterialModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

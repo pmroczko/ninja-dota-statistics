@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'ninja-dota-statistics';
+  title = 'Ninja Dota Statistics';
+
+  public form: FormGroup = new FormGroup({
+    guildId: new FormControl('1234'),
+  });
 }
