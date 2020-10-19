@@ -2,14 +2,13 @@
   Full Data for guild {{GuildService.GuildId}}
 </p>
 
-<div class="gridWrapper">
-  <ag-grid-angular
+  <ag-grid-angular style="width: 100%; height: 85%;"
     #agGrid
     class="ag-theme-alpine"
     [rowData]="FullData"
     [columnDefs]="Columns"
     [defaultColDef]="ColDef"
+    [pagination]="true"
     (gridReady)="onGridReady($event)"
   >
   </ag-grid-angular>
-</div>

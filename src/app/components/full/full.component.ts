@@ -55,7 +55,7 @@ export class FullComponent implements OnInit {
     {
       headerName: "WinLooseRatio",
       field: "WinLooseRatio",
-      type: "number",
+      type: "integer",
       sortable: true
     },
   ]
@@ -76,7 +76,7 @@ export class FullComponent implements OnInit {
   onGridReady(params) {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
-    this.gridApi.setDomLayout("autoHeight");
+    //this.gridApi.setDomLayout("autoHeight");
     //this.gridApi.sizeColumnsToFit();
   }
 
