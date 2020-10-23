@@ -44,3 +44,6 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+.firebase/hosting.ZGlzdFxuaW5qYS1kb3RhLXN0YXRpc3RpY3M.cache
+package-lock.json
+.firebase/hosting.ZGlzdFxuaW5qYS1kb3RhLXN0YXRpc3RpY3M.cache

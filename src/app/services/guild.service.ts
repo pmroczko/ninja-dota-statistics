@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FullEntity } from '../models/fullEntity';
-import * as EXAMPLE from '../../dota_example.json';
 import { HttpClient } from '@angular/common/http';
 import { AppConst } from '../appConst';
-import { Subscription } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
 
 @Injectable({
@@ -11,7 +9,8 @@ import { Observable } from 'rxjs/internal/Observable';
 })
 
 export class GuildService {
-  
+  public GuildId = "unknown";
+  public FullData: FullEntity[] = [];
   private ParseFullData(data): FullEntity[] {
 
     const parsePlayer = (e): any => {
@@ -19,7 +18,7 @@ export class GuildService {
         return "";
       return `${e[0]} ${e[1]}`
     }
-    return data.payload.map(e => {
+    return data.map(e => {
       let ret: FullEntity = new FullEntity;
       let players = e[0];
       let score = e[1];
@@ -45,10 +44,14 @@ export class GuildService {
   }
 
   public GetData(): Observable<any> {
-    return this.httpClient.get(AppConst.FULL_URL);
+    if (this.GuildId == 'unknown') {
+      this.GuildId = AppConst.DEFAULT_GUILD_ID;
+    }
+  //let port = 3000;
+    let port = this.httpClient.get('/heroku-port');
+    //console.log("Found heroku port ${port}");
+    return this.httpClient.get(`${AppConst.FULL_URL}`);
+    //return this.httpClient.get(`${AppConst.FULL_URL}/${this.GuildId}`);
   }
-
-  public GuildId = "unknown";
-  public FullData: FullEntity[] = [];
 
 }

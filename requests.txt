@@ -1,0 +1,4 @@
+GET /dotastats/guild/roles_wr/<guild_id> to jest to samo co poprzednie, tylko jeżeli nie ma danych policzonych to ich nie liczy tylko zwraca error
+POST /dotastats/guild/process/<guild_id> wrzuca gildie do kolejki do ściągnięcia danych i policzenia wszystkiego
+GET /guild/roles_synergy/<guild_id> ->  Vec<(Roles, double)>
+GET /guild/roles_records/<guild_id>

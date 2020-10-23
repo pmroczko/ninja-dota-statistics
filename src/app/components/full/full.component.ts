@@ -14,6 +14,7 @@ export class FullComponent implements OnInit {
 
   private GuildService: GuildService;
   public FullData: FullEntity[] = [];
+
   public Columns = [
     {
       headerName: "Player1",
@@ -62,14 +63,14 @@ export class FullComponent implements OnInit {
     editable: true,
     resizable: true,
   };
-  constructor(guildService: GuildService) { 
-    this.GuildService = guildService;
+  
+  constructor(private guildService: GuildService) { 
   }
 
   ngOnInit() {
-    this.GuildService.GetData().subscribe((data) => {
-      this.GuildService.ParseData(data);
-      this.FullData = this.GuildService.FullData;
+    this.guildService.GetData().subscribe((data) => {
+      this.guildService.ParseData(data);
+      this.FullData = this.guildService.FullData;
       console.log("Request success!");
     });
   }
