@@ -1,5 +1,15 @@
 @import "../node_modules/ag-grid-community/src/styles/ag-grid.scss";
 @import "../node_modules/ag-grid-community/src/styles/ag-theme-alpine/sass/ag-theme-alpine-mixin.scss";
+@import "~@angular/material/theming";
+@include mat-core();
+// default theme:
+$primary: mat-palette($mat-blue, 800);
+$accent: mat-palette($mat-teal);
+$theme: mat-light-theme($primary, $accent);
+
+//$dark-p: mat-palette($mat-blue-grey, 500);
+
+@include angular-material-theme($theme);
 
 html,
 body {
@@ -22,4 +32,11 @@ body {
 }
 .toolbar-right-separator {
   flex: 1 1 auto;
+}
+.menu-active {
+  color: yellow;
+}
+.mat-menu-content {
+  background-color: mat-color($primary, default);
+  color: white !important;
 }

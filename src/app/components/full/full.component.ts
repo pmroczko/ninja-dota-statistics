@@ -68,7 +68,7 @@ export class FullComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.guildService.GetData().subscribe((data) => {
+    this.guildService.GetFullData().subscribe((data) => {
       this.guildService.ParseData(data);
       this.FullData = this.guildService.FullData;
       console.log("Request success!");

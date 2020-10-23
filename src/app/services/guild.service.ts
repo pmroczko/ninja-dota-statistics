@@ -3,6 +3,7 @@ import { FullEntity } from '../models/fullEntity';
 import { HttpClient } from '@angular/common/http';
 import { AppConst } from '../appConst';
 import { Observable } from 'rxjs/internal/Observable';
+import { environment } from './../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +12,15 @@ import { Observable } from 'rxjs/internal/Observable';
 export class GuildService {
   public GuildId = "unknown";
   public FullData: FullEntity[] = [];
-  private ParseFullData(data): FullEntity[] {
 
+  private ApiUrl: string;
+
+  constructor(private httpClient: HttpClient) {
+    this.FullData = [];
+    this.ApiUrl = environment.apiUrl;
+  }
+
+  private ParseFullData(data): FullEntity[] {
     const parsePlayer = (e): any => {
       if (!e)
         return "";
@@ -33,9 +41,6 @@ export class GuildService {
       return ret;
     })
   }
-  constructor(private httpClient: HttpClient) {
-    this.FullData = [];
-  }
 
 
   public ParseData(data) {
@@ -43,15 +48,11 @@ export class GuildService {
     this.GuildId = data["guild_id"]
   }
 
-  public GetData(): Observable<any> {
+  public GetFullData(): Observable<any> {
     if (this.GuildId == 'unknown') {
       this.GuildId = AppConst.DEFAULT_GUILD_ID;
     }
-  //let port = 3000;
-    let port = this.httpClient.get('/heroku-port');
-    //console.log("Found heroku port ${port}");
-    return this.httpClient.get(`${AppConst.FULL_URL}`);
-    //return this.httpClient.get(`${AppConst.FULL_URL}/${this.GuildId}`);
+    return this.httpClient.get(`${this.ApiUrl}/full`);
   }
 
 }
