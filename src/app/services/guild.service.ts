@@ -37,7 +37,9 @@ export class GuildService {
       ret.Player5 = parsePlayer(players[4]);
       ret.Wins = +score['wins'];
       ret.Looses = +score['looses'];
-      ret.WinLooseRatio = Math.round(100*ret.Wins / ret.Looses)/100;
+      let ratio = ret.Wins / (ret.Wins + ret.Looses);
+      ratio = Math.round(100 * ratio);
+      ret.WinRatio = `${ratio}%`;
       return ret;
     })
   }

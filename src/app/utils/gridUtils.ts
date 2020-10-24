@@ -37,7 +37,8 @@ export class GridUtils {
         columns.push({
             headerName: "Player" + playerNo,
             field: "Player" + playerNo,
-            type: "text"
+            type: "text",
+            filter: 'agTextColumnFilter'
         })
     }
     public static AddOtherFullColumns(columns: Array<any>) {
@@ -54,8 +55,8 @@ export class GridUtils {
             })
         columns.push(
             {
-                headerName: "WinLooseRatio",
-                field: "WinLooseRatio",
+                headerName: "Win Ratio",
+                field: "WinRatio",
                 sortable: true
             })
     }

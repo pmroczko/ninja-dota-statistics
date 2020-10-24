@@ -35,21 +35,25 @@ export class FullComponent implements OnInit {
 
   private FilterDisplayData() {
     this.DisplayData = this.FullData;
-    let modeNumber: Number = +this.Mode;
-    if (modeNumber == 5 || this.Mode == "any")
-      return;
 
-    if (modeNumber < 5) {
-      this.DisplayData = this.DisplayData.filter(d => d.Player5 == "")
-    }
-    if (modeNumber < 4) {
-      this.DisplayData = this.DisplayData.filter(d => d.Player4 == "")
-    }
-    if (modeNumber < 3) {
-      this.DisplayData = this.DisplayData.filter(d => d.Player3 == "")
-    }
-    if (modeNumber < 2) {
-      this.DisplayData = this.DisplayData.filter(d => d.Player2 == "")
+    switch (this.Mode) {
+      case "any":
+        return;
+      case "5":
+        this.DisplayData = this.DisplayData.filter(d => d.Player5 != "");
+        return;
+      case "4":
+        this.DisplayData = this.DisplayData.filter(d => d.Player5 == "" && d.Player4 != "");
+        return;
+      case "3":
+        this.DisplayData = this.DisplayData.filter(d => d.Player4 == "" && d.Player3 != "")
+        return;
+      case "2":
+        this.DisplayData = this.DisplayData.filter(d => d.Player3 == "" && d.Player2 != "")
+        return;
+      case "1":
+        this.DisplayData = this.DisplayData.filter(d => d.Player2 == "")
+        return;
     }
   }
 

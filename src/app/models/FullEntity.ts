@@ -7,5 +7,5 @@ export class FullEntity {
 
     public Wins: number;
     public Looses: number;
-    public WinLooseRatio: number;
+    public WinRatio: string;
 }
