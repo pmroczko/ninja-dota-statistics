@@ -19,12 +19,7 @@ export class RoleWrComponent implements OnInit {
 
   public Columns: Array<any>;
 
-  public ColDef = {
-    flex: 1,
-    minWidth: 110,
-    editable: true,
-    resizable: true,
-  };
+  public ColDef = GridUtils.GetRoleColDef();
 
   constructor(private guildService: GuildService, private route: ActivatedRoute) {
     this.route.params.subscribe(params => {
@@ -59,14 +54,14 @@ export class RoleWrComponent implements OnInit {
 
   private initGrid(mode: string) {
     this.Mode = mode;
-    this.Columns = GridUtils.GetRoleColumns(mode);
+    this.Columns = GridUtils.GetRoleWrColumns(mode);
     this.FilterDisplayData();
   }
 
   ngOnInit() {
-    this.guildService.GetRoleData().subscribe((data) => {
-      this.guildService.ParseData(data);
-      this.RoleData = this.guildService.RoleData;
+    this.guildService.GetRoleWr().subscribe((data) => {
+      this.guildService.ParseRoleWrData(data);
+      this.RoleData = this.guildService.RoleWrData;
       this.FilterDisplayData();
       console.log("Role Data request success!");
     });

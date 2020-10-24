@@ -1,6 +1,27 @@
 export class GridUtils {
 
-    public static GetRoleColumns(mode: string): Array<any> {
+    public static GetRoleColDef(): any {
+        return {
+            flex: 1,
+            minWidth: 110,
+            editable: true,
+            resizable: true,
+        };
+    }
+
+    public static GetRoleSynergyColumns(): Array<any> {
+        let columns: Array<any> = [];
+        this.AddRolePlayerColumn(columns, 1);
+        this.AddRolePlayerColumn(columns, 2);
+        columns.push(
+            {
+                headerName: "Win Factor",
+                field: "WinFactor",
+                sortable: true
+            })
+        return columns;
+    }
+    public static GetRoleWrColumns(mode: string): Array<any> {
         let columns: Array<any> = [];
         let columnsToAdd: Array<number> = [];
         if (mode == "any") {
