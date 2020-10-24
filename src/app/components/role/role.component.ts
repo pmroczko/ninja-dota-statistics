@@ -1,20 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { FullEntity } from 'src/app/models/fullEntity';
+import { RoleEntity } from 'src/app/models/roleEntity';
 import { GuildService } from '../../services/guild.service';
 import { ActivatedRoute } from "@angular/router";
 import { GridUtils } from 'src/app/utils/gridUtils';
 
 @Component({
-  selector: 'app-full',
-  templateUrl: './full.component.html',
-  styleUrls: ['./full.component.scss']
+  selector: 'app-role',
+  templateUrl: './role.component.html',
+  styleUrls: ['./role.component.scss']
 })
-export class FullComponent implements OnInit {
+export class RoleComponent implements OnInit {
 
   private GridApi;
   private GridApiColumns;
-  public FullData: FullEntity[] = [];
-  public DisplayData: FullEntity[] = [];
+  public RoleData: RoleEntity[] = [];
+  public DisplayData: RoleEntity[] = [];
   private Mode: string = "any";
 
   public Columns: Array<any>;
@@ -34,7 +34,7 @@ export class FullComponent implements OnInit {
   }
 
   private FilterDisplayData() {
-    this.DisplayData = this.FullData;
+    this.DisplayData = this.RoleData;
 
     switch (this.Mode) {
       case "any":
@@ -59,16 +59,16 @@ export class FullComponent implements OnInit {
 
   private initGrid(mode: string) {
     this.Mode = mode;
-    this.Columns = GridUtils.GetColumnsFull(mode);
+    this.Columns = GridUtils.GetRoleColumns(mode);
     this.FilterDisplayData();
   }
 
   ngOnInit() {
-    this.guildService.GetFullData().subscribe((data) => {
+    this.guildService.GetRoleData().subscribe((data) => {
       this.guildService.ParseData(data);
-      this.FullData = this.guildService.FullData;
+      this.RoleData = this.guildService.RoleData;
       this.FilterDisplayData();
-      console.log("Full Data request success!");
+      console.log("Role Data request success!");
     });
   }
 

@@ -1,14 +1,14 @@
 export class GridUtils {
 
-    public static GetColumnsFull(mode: string): Array<any> {
+    public static GetRoleColumns(mode: string): Array<any> {
         let columns: Array<any> = [];
         let columnsToAdd: Array<number> = [];
         if (mode == "any") {
-            this.AddFullPlayerColumn(columns, 1);
-            this.AddFullPlayerColumn(columns, 2);
-            this.AddFullPlayerColumn(columns, 3);
-            this.AddFullPlayerColumn(columns, 4);
-            this.AddFullPlayerColumn(columns, 5);
+            this.AddRolePlayerColumn(columns, 1);
+            this.AddRolePlayerColumn(columns, 2);
+            this.AddRolePlayerColumn(columns, 3);
+            this.AddRolePlayerColumn(columns, 4);
+            this.AddRolePlayerColumn(columns, 5);
         } else
             switch (mode) {
                 case "any":
@@ -28,12 +28,12 @@ export class GridUtils {
                     break;
             }
         columnsToAdd.sort((c1, c2) => (c1 > c2 ? 1 : -1));
-        columnsToAdd.forEach(c => this.AddFullPlayerColumn(columns, c));
-        this.AddOtherFullColumns(columns);
+        columnsToAdd.forEach(c => this.AddRolePlayerColumn(columns, c));
+        this.AddOtherRoleColumns(columns);
         return columns;
     }
 
-    private static AddFullPlayerColumn(columns: Array<any>, playerNo: number) {
+    private static AddRolePlayerColumn(columns: Array<any>, playerNo: number) {
         columns.push({
             headerName: "Player" + playerNo,
             field: "Player" + playerNo,
@@ -41,7 +41,7 @@ export class GridUtils {
             filter: 'agTextColumnFilter'
         })
     }
-    public static AddOtherFullColumns(columns: Array<any>) {
+    public static AddOtherRoleColumns(columns: Array<any>) {
         columns.push({
             headerName: "Wins",
             field: "Wins",

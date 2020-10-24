@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FullEntity } from '../models/fullEntity';
+import { RoleEntity } from '../models/roleEntity';
 import { HttpClient } from '@angular/common/http';
 import { AppConst } from '../appConst';
 import { Observable } from 'rxjs/internal/Observable';
@@ -11,23 +11,23 @@ import { environment } from './../../environments/environment';
 
 export class GuildService {
   public GuildId = "unknown";
-  public FullData: FullEntity[] = [];
+  public RoleData: RoleEntity[] = [];
 
   private ApiUrl: string;
 
   constructor(private httpClient: HttpClient) {
-    this.FullData = [];
+    this.RoleData = [];
     this.ApiUrl = environment.apiUrl;
   }
 
-  private ParseFullData(data): FullEntity[] {
+  private ParseRoleData(data): RoleEntity[] {
     const parsePlayer = (e): any => {
       if (!e)
         return "";
       return `${e[0]} ${e[1]}`
     }
     return data.map(e => {
-      let ret: FullEntity = new FullEntity;
+      let ret: RoleEntity = new RoleEntity;
       let players = e[0];
       let score = e[1];
       ret.Player1 = parsePlayer(players[0]);
@@ -46,15 +46,15 @@ export class GuildService {
 
 
   public ParseData(data) {
-    this.FullData = this.ParseFullData(data);
+    this.RoleData = this.ParseRoleData(data);
     this.GuildId = data["guild_id"]
   }
 
-  public GetFullData(): Observable<any> {
+  public GetRoleData(): Observable<any> {
     if (this.GuildId == 'unknown') {
       this.GuildId = AppConst.DEFAULT_GUILD_ID;
     }
-    return this.httpClient.get(`${this.ApiUrl}/full`);
+    return this.httpClient.get(`${this.ApiUrl}/roles`);
   }
 
 }

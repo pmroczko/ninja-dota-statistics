@@ -4,14 +4,14 @@
     <span class="menu-spacer"></span>
     <div>
       <a mat-button [routerLink]="'/home'" routerLinkActive="menu-active"> Home </a>
-      <button mat-button [matMenuTriggerFor]="menu">Full Data</button>
+      <button mat-button [matMenuTriggerFor]="menu">Roles</button>
       <mat-menu #menu="matMenu"  class="mat-menu-customized">
-        <a mat-button [routerLink]="'/full/any'" routerLinkActive="menu-active">Any Players</a>
-        <a mat-button [routerLink]="'/full/1'" routerLinkActive="menu-active">1 Player</a>
-        <a mat-button [routerLink]="'/full/2'" routerLinkActive="menu-active">2 Players</a>
-        <a mat-button [routerLink]="'/full/3'" routerLinkActive="menu-active">3 Players</a>
-        <a mat-button [routerLink]="'/full/4'" routerLinkActive="menu-active">4 Players</a>
-        <a mat-button [routerLink]="'/full/5'" routerLinkActive="menu-active">5 Players</a>
+        <a mat-button [routerLink]="'/roles/any'" routerLinkActive="menu-active">Any Players</a>
+        <a mat-button [routerLink]="'/roles/1'" routerLinkActive="menu-active">1 Player</a>
+        <a mat-button [routerLink]="'/roles/2'" routerLinkActive="menu-active">2 Players</a>
+        <a mat-button [routerLink]="'/roles/3'" routerLinkActive="menu-active">3 Players</a>
+        <a mat-button [routerLink]="'/roles/4'" routerLinkActive="menu-active">4 Players</a>
+        <a mat-button [routerLink]="'/roles/5'" routerLinkActive="menu-active">5 Players</a>
       </mat-menu>
     </div>
     <span class="toolbar-right-separator"></span>
