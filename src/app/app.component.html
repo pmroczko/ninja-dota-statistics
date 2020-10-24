@@ -13,6 +13,7 @@
         <a mat-button [routerLink]="'/roles_wr/4'" routerLinkActive="menu-active">4 Players</a>
         <a mat-button [routerLink]="'/roles_wr/5'" routerLinkActive="menu-active">5 Players</a>
       </mat-menu>
+      <a mat-button [routerLink]="'/roles_synergy'" routerLinkActive="menu-active"> Synergies </a>
     </div>
     <span class="toolbar-right-separator"></span>
     <form [formGroup]="form" (ngSubmit)="onSubmit(form.value.guildId)">

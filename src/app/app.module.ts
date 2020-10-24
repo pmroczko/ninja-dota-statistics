@@ -5,12 +5,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
-import { RoleWrComponent } from './components/roleWr/roleWr.component'
+import { RoleWrComponent } from './components/role-wr/role-wr.component'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { DemoMaterialModule } from './material.module';
 import { AgGridModule } from 'ag-grid-angular';
+import { RoleSynergyComponent } from './components/role-synergy/role-synergy.component';
 
 
 const appRoutes: Routes = [
@@ -23,7 +24,8 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     HomeComponent,
-    RoleWrComponent
+    RoleWrComponent,
+    RoleSynergyComponent
   ],
   imports: [
     RouterModule.forRoot(

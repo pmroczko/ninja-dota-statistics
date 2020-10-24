@@ -6,8 +6,8 @@ import { GridUtils } from 'src/app/utils/gridUtils';
 
 @Component({
   selector: 'app-role',
-  templateUrl: './roleWr.component.html',
-  styleUrls: ['./roleWr.component.scss']
+  templateUrl: './role-wr.component.html',
+  styleUrls: ['./role-wr.component.scss']
 })
 export class RoleWrComponent implements OnInit {
 
