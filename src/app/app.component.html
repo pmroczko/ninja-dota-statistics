@@ -3,8 +3,8 @@
   <mat-toolbar-row>
     <span class="menu-spacer"></span>
     <div>
-      <a mat-button [routerLink]="'/home'" routerLinkActive="menu-active"> Home </a>
-      <button mat-button [matMenuTriggerFor]="menu">Win Ratio</button>
+      <a mat-button [routerLink]="'/home'" routerLinkActive="menu-active"> Records </a>
+      <button mat-button [matMenuTriggerFor]="menu" >Win Ratio</button>
       <mat-menu #menu="matMenu"  class="mat-menu-customized">
         <a mat-button [routerLink]="'/roles_wr/any'" routerLinkActive="menu-active">Any Players</a>
         <a mat-button [routerLink]="'/roles_wr/1'" routerLinkActive="menu-active">1 Player</a>

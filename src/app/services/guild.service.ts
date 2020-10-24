@@ -5,6 +5,8 @@ import { AppConst } from '../appConst';
 import { Observable } from 'rxjs/internal/Observable';
 import { environment } from './../../environments/environment';
 import { RoleSynergyEntity } from '../models/roleSynergyEntity';
+import { CalcUtils } from '../utils/calcUtils';
+import { StringUtils } from '../utils/stringUtils';
 
 @Injectable({
   providedIn: 'root'
@@ -22,27 +24,19 @@ export class GuildService {
     this.ApiUrl = environment.apiUrl;
   }
 
-  private parsePlayer = (e): any => {
-    if (!e)
-      return "";
-    return `${e[0]} ${e[1]}`
-  }
-
   public ParseRoleWrData(data): void {
     this.RoleWrData = data.map(e => {
       let ret: RoleWrEntity = new RoleWrEntity;
       let players = e[0];
       let score = e[1];
-      ret.Player1 = this.parsePlayer(players[0]);
-      ret.Player2 = this.parsePlayer(players[1]);
-      ret.Player3 = this.parsePlayer(players[2]);
-      ret.Player4 = this.parsePlayer(players[3]);
-      ret.Player5 = this.parsePlayer(players[4]);
+      ret.Player1 = StringUtils.ParsePlayer(players[0]);
+      ret.Player2 = StringUtils.ParsePlayer(players[1]);
+      ret.Player3 = StringUtils.ParsePlayer(players[2]);
+      ret.Player4 = StringUtils.ParsePlayer(players[3]);
+      ret.Player5 = StringUtils.ParsePlayer(players[4]);
       ret.Wins = +score['wins'];
       ret.Looses = +score['looses'];
-      let ratio = ret.Wins / (ret.Wins + ret.Looses);
-      ratio = Math.round(100 * ratio);
-      ret.WinRatio = `${ratio}%`;
+      ret.WinRatio = CalcUtils.CalcWinRatio(ret.Wins, ret.Looses);
       return ret;
     })
     this.GuildId = data["guild_id"]
@@ -53,8 +47,8 @@ export class GuildService {
       let ret: RoleSynergyEntity = new RoleSynergyEntity();
       let players = e[0];
       let score = e[1];
-      ret.Player1 = this.parsePlayer(players[0]);
-      ret.Player2 = this.parsePlayer(players[1]);
+      ret.Player1 = StringUtils.ParsePlayer(players[0]);
+      ret.Player2 = StringUtils.ParsePlayer(players[1]);
       ret.WinFactor = score;
       return ret;
     })
@@ -74,4 +68,10 @@ export class GuildService {
     return this.httpClient.get(`${this.ApiUrl}/roles_synergy`);
   }
 
+  public GetRoleRecords(): Observable<any> {
+    if (this.GuildId == 'unknown') {
+      this.GuildId = AppConst.DEFAULT_GUILD_ID;
+    }
+    return this.httpClient.get(`${this.ApiUrl}/roles_records`);
+  }
 }

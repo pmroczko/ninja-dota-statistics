@@ -1,3 +1,12 @@
-<p>
-  This is Home Page
-</p>
+<div *ngIf="IsDataLoaded()">
+  <mat-divider></mat-divider>
+  <div class='record-entry' [innerHtml]="PrintBestFightingCrew()"></div>
+  <mat-divider></mat-divider>
+  <div class='record-entry' [innerHtml]="PrintBestNukingSquad()"></div>
+  <mat-divider></mat-divider>
+  <div class='record-entry' [innerHtml]="PrintBestSinglePlayer()"></div>
+  <mat-divider></mat-divider>
+  <div class='record-entry' [innerHtml]="PrintBestCarrySupp()"></div>
+  <mat-divider></mat-divider>
+</div>
+<div *ngIf="!IsDataLoaded()">Loading data...</div>
