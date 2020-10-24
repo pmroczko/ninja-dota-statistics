@@ -15,7 +15,7 @@ import { AgGridModule } from 'ag-grid-angular';
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
-  { path: 'full/:fullMode', component: FullComponent},
+  { path: 'full/:mode', component: FullComponent},
   { path: '',   redirectTo: '/home', pathMatch: 'full' },
 ]
 

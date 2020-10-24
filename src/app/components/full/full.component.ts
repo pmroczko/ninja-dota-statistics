@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FullEntity } from 'src/app/models/fullEntity';
 import { GuildService } from '../../services/guild.service';
+import { ActivatedRoute } from "@angular/router";
+import { GridUtils } from 'src/app/utils/gridUtils';
 
 @Component({
   selector: 'app-full',
@@ -9,75 +11,66 @@ import { GuildService } from '../../services/guild.service';
 })
 export class FullComponent implements OnInit {
 
-  private gridApi;
-  private gridColumnApi;
-
-  private GuildService: GuildService;
+  private GridApi;
+  private GridApiColumns;
   public FullData: FullEntity[] = [];
+  public DisplayData: FullEntity[] = [];
+  private Mode: string = "any";
 
-  public Columns = [
-    {
-      headerName: "Player1",
-      field: "Player1",
-      type: "text",
-    },
-    {
-      headerName: "Player2",
-      field: "Player2",
-      type: "text",
-    },
-    {
-      headerName: "Player3",
-      field: "Player3",
-      type: "text",
-    },
-    {
-      headerName: "Player4",
-      field: "Player4",
-      type: "text",
-    },
-    {
-      headerName: "Player5",
-      field: "Player5",
-      type: "text",
-    },
-    {
-      headerName: "Wins",
-      field: "Wins",
-      sortable: true
-    },
-    {
-      headerName: "Looses",
-      field: "Looses",
-      sortable: true
-    },
-    {
-      headerName: "WinLooseRatio",
-      field: "WinLooseRatio",
-      sortable: true
-    },
-  ]
+  public Columns: Array<any>;
+
   public ColDef = {
     flex: 1,
     minWidth: 110,
     editable: true,
     resizable: true,
   };
-  
-  constructor(private guildService: GuildService) { 
+
+  constructor(private guildService: GuildService, private route: ActivatedRoute) {
+    this.route.params.subscribe(params => {
+      //this.Mode = params.mode;
+      this.initGrid(params.mode);
+    });
+  }
+
+  private FilterDisplayData() {
+    this.DisplayData = this.FullData;
+    let modeNumber: Number = +this.Mode;
+    if (modeNumber == 5 || this.Mode == "any")
+      return;
+
+    if (modeNumber < 5) {
+      this.DisplayData = this.DisplayData.filter(d => d.Player5 == "")
+    }
+    if (modeNumber < 4) {
+      this.DisplayData = this.DisplayData.filter(d => d.Player4 == "")
+    }
+    if (modeNumber < 3) {
+      this.DisplayData = this.DisplayData.filter(d => d.Player3 == "")
+    }
+    if (modeNumber < 2) {
+      this.DisplayData = this.DisplayData.filter(d => d.Player2 == "")
+    }
+  }
+
+  private initGrid(mode: string) {
+    this.Mode = mode;
+    this.Columns = GridUtils.GetColumnsFull(mode);
+    this.FilterDisplayData();
   }
 
   ngOnInit() {
     this.guildService.GetFullData().subscribe((data) => {
       this.guildService.ParseData(data);
       this.FullData = this.guildService.FullData;
-      console.log("Request success!");
+      this.FilterDisplayData();
+      console.log("Full Data request success!");
     });
   }
 
   onGridReady(params) {
-    this.gridApi = params.api;
-    this.gridColumnApi = params.columnApi;
+    this.GridApi = params.api;
+    this.GridApiColumns = params.columnApi;
     //this.gridApi.setDomLayout("autoHeight");
     //this.gridApi.sizeColumnsToFit();
   }
