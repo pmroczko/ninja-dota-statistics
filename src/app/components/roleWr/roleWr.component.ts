@@ -1,20 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { RoleEntity } from 'src/app/models/roleEntity';
+import { RoleWrEntity } from 'src/app/models/roleWrEntity';
 import { GuildService } from '../../services/guild.service';
 import { ActivatedRoute } from "@angular/router";
 import { GridUtils } from 'src/app/utils/gridUtils';
 
 @Component({
   selector: 'app-role',
-  templateUrl: './role.component.html',
-  styleUrls: ['./role.component.scss']
+  templateUrl: './roleWr.component.html',
+  styleUrls: ['./roleWr.component.scss']
 })
-export class RoleComponent implements OnInit {
+export class RoleWrComponent implements OnInit {
 
   private GridApi;
   private GridApiColumns;
-  public RoleData: RoleEntity[] = [];
-  public DisplayData: RoleEntity[] = [];
+  public RoleData: RoleWrEntity[] = [];
+  public DisplayData: RoleWrEntity[] = [];
   private Mode: string = "any";
 
   public Columns: Array<any>;

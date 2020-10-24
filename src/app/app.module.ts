@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
-import { RoleComponent } from './components/role/role.component'
+import { RoleWrComponent } from './components/roleWr/roleWr.component'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -15,7 +15,7 @@ import { AgGridModule } from 'ag-grid-angular';
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
-  { path: 'roles/:mode', component: RoleComponent },
+  { path: 'roles_wr/:mode', component: RoleWrComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
 ]
 
@@ -23,7 +23,7 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     HomeComponent,
-    RoleComponent
+    RoleWrComponent
   ],
   imports: [
     RouterModule.forRoot(
