@@ -9,10 +9,9 @@ export class GridUtils {
         };
     }
 
-    public static GetRoleSynergyColumns(): Array<any> {
+    public static GetRoleSynergyColumns(mode): Array<any> {
         let columns: Array<any> = [];
-        this.AddRolePlayerColumn(columns, 1);
-        this.AddRolePlayerColumn(columns, 2);
+        this.UpdateModeColumns(columns, mode);
         columns.push(
             {
                 headerName: "Win Factor",
@@ -23,6 +22,12 @@ export class GridUtils {
     }
     public static GetRoleWrColumns(mode: string): Array<any> {
         let columns: Array<any> = [];
+        this.UpdateModeColumns(columns, mode);
+        this.AddOtherRoleColumns(columns);
+        return columns;
+    }
+
+    private static UpdateModeColumns(columns, mode): void {
         let columnsToAdd: Array<number> = [];
         if (mode == "any") {
             this.AddRolePlayerColumn(columns, 1);
@@ -50,8 +55,24 @@ export class GridUtils {
             }
         columnsToAdd.sort((c1, c2) => (c1 > c2 ? 1 : -1));
         columnsToAdd.forEach(c => this.AddRolePlayerColumn(columns, c));
-        this.AddOtherRoleColumns(columns);
-        return columns;
+    }
+
+    public static FilterDataPerPlayer(inputData: Array<any>, mode: string): Array<any> {
+        switch (mode) {
+            case "any":
+                return inputData;
+            case "5":
+                return inputData.filter(d => d.Player5 != "");
+            case "4":
+                return inputData.filter(d => d.Player5 == "" && d.Player4 != "");
+            case "3":
+                return inputData.filter(d => d.Player4 == "" && d.Player3 != "")
+            case "2":
+                return inputData.filter(d => d.Player3 == "" && d.Player2 != "")
+            case "1":
+                return inputData.filter(d => d.Player2 == "")
+        }
+        return inputData;
     }
 
     private static AddRolePlayerColumn(columns: Array<any>, playerNo: number) {

@@ -27,42 +27,17 @@ export class RoleWrComponent implements OnInit {
       this.initGrid(params.mode);
     });
   }
-
-  private FilterDisplayData() {
-    this.DisplayData = this.RoleData;
-
-    switch (this.Mode) {
-      case "any":
-        return;
-      case "5":
-        this.DisplayData = this.DisplayData.filter(d => d.Player5 != "");
-        return;
-      case "4":
-        this.DisplayData = this.DisplayData.filter(d => d.Player5 == "" && d.Player4 != "");
-        return;
-      case "3":
-        this.DisplayData = this.DisplayData.filter(d => d.Player4 == "" && d.Player3 != "")
-        return;
-      case "2":
-        this.DisplayData = this.DisplayData.filter(d => d.Player3 == "" && d.Player2 != "")
-        return;
-      case "1":
-        this.DisplayData = this.DisplayData.filter(d => d.Player2 == "")
-        return;
-    }
-  }
-
   private initGrid(mode: string) {
     this.Mode = mode;
     this.Columns = GridUtils.GetRoleWrColumns(mode);
-    this.FilterDisplayData();
+    this.DisplayData = GridUtils.FilterDataPerPlayer(this.RoleData, this.Mode)
   }
 
   ngOnInit() {
     this.guildService.GetRoleWr().subscribe((data) => {
       this.guildService.ParseRoleWrData(data);
       this.RoleData = this.guildService.RoleWrData;
-      this.FilterDisplayData();
+      this.DisplayData = GridUtils.FilterDataPerPlayer(this.RoleData, this.Mode)
       console.log("Role Data request success!");
     });
   }

@@ -17,7 +17,7 @@ import { RoleSynergyComponent } from './components/role-synergy/role-synergy.com
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'roles_wr/:mode', component: RoleWrComponent },
-  { path: 'roles_synergy', component: RoleSynergyComponent },
+  { path: 'roles_synergy/:mode', component: RoleSynergyComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
 ]
 

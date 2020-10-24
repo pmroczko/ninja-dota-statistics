@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit {
 
   constructor(private guildService: GuildService) { }
 
-  private IsDataLoaded() {
+  public IsDataLoaded() {
     return this.RecordData !== undefined;
   }
 
@@ -45,13 +45,13 @@ export class HomeComponent implements OnInit {
     return ret;
 
   }
-  private PrintBestFightingCrew() {
+  public PrintBestFightingCrew() {
     return this.PrintBestSquad('best_fight_crew', 'Best Fighting Crew');
   }
-  private PrintBestNukingSquad() {
+  public PrintBestNukingSquad() {
     return this.PrintBestSquad('best_nuking_squad', 'Best Nuking Squad');
   }
-  private PrintBestSinglePlayer() {
+  public PrintBestSinglePlayer() {
     let data = this.RecordData['best_single'];
     let ret = "Best Player per Role:";
     const playerClass = 'record-player';
@@ -71,7 +71,7 @@ export class HomeComponent implements OnInit {
     return ret;
   }
 
-  private PrintBestCarrySupp() {
+  public PrintBestCarrySupp() {
     let data = this.RecordData['top3_carry_sup'];
     let ret = "Top 3 carry/support:";
     const playerClass = 'record-player';

@@ -4,8 +4,8 @@
     <span class="menu-spacer"></span>
     <div>
       <a mat-button [routerLink]="'/home'" routerLinkActive="menu-active"> Records </a>
-      <button mat-button [matMenuTriggerFor]="menu" >Win Ratio</button>
-      <mat-menu #menu="matMenu"  class="mat-menu-customized">
+      <button mat-button [matMenuTriggerFor]="menuWr" >Win Ratio</button>
+      <mat-menu #menuWr="matMenu"  class="mat-menu-customized">
         <a mat-button [routerLink]="'/roles_wr/any'" routerLinkActive="menu-active">Any Players</a>
         <a mat-button [routerLink]="'/roles_wr/1'" routerLinkActive="menu-active">1 Player</a>
         <a mat-button [routerLink]="'/roles_wr/2'" routerLinkActive="menu-active">2 Players</a>
@@ -13,7 +13,15 @@
         <a mat-button [routerLink]="'/roles_wr/4'" routerLinkActive="menu-active">4 Players</a>
         <a mat-button [routerLink]="'/roles_wr/5'" routerLinkActive="menu-active">5 Players</a>
       </mat-menu>
-      <a mat-button [routerLink]="'/roles_synergy'" routerLinkActive="menu-active"> Synergies </a>
+      
+      <button mat-button [matMenuTriggerFor]="menuSynergy" >Synergies</button>
+      <mat-menu #menuSynergy="matMenu"  class="mat-menu-customized">
+        <a mat-button [routerLink]="'/roles_synergy/any'" routerLinkActive="menu-active">Any Players</a>
+        <a mat-button [routerLink]="'/roles_synergy/2'" routerLinkActive="menu-active">2 Players</a>
+        <a mat-button [routerLink]="'/roles_synergy/3'" routerLinkActive="menu-active">3 Players</a>
+        <a mat-button [routerLink]="'/roles_synergy/4'" routerLinkActive="menu-active">4 Players</a>
+        <a mat-button [routerLink]="'/roles_synergy/5'" routerLinkActive="menu-active">5 Players</a>
+      </mat-menu>
     </div>
     <span class="toolbar-right-separator"></span>
     <form [formGroup]="form" (ngSubmit)="onSubmit(form.value.guildId)">

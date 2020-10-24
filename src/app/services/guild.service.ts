@@ -49,6 +49,9 @@ export class GuildService {
       let score = e[1];
       ret.Player1 = StringUtils.ParsePlayer(players[0]);
       ret.Player2 = StringUtils.ParsePlayer(players[1]);
+      ret.Player3 = StringUtils.ParsePlayer(players[2]);
+      ret.Player4 = StringUtils.ParsePlayer(players[3]);
+      ret.Player5 = StringUtils.ParsePlayer(players[4]);
       ret.WinFactor = score;
       return ret;
     })
