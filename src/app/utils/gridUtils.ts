@@ -61,7 +61,8 @@ export class GridUtils {
             {
                 headerName: "Win Ratio",
                 field: "WinRatio",
-                sortable: true
+                sortable: true,
+                comparator: GridUtils.PercentComparator
             })
         if (mode == AppConst.HERO_TYPE_REL || mode == AppConst.HERO_TYPE_TOP) {
             columns.push({
@@ -145,7 +146,16 @@ export class GridUtils {
             {
                 headerName: "Win Ratio",
                 field: "WinRatio",
-                sortable: true
+                sortable: true,
+                comparator: GridUtils.PercentComparator
             })
+    }
+
+    public static PercentComparator(value1: string, value2: string) {
+        let val1 = +(value1.substring(0, value1.length - 1));
+        let val2 = +(value2.substring(0, value2.length - 1));
+        if (val1 == val2)
+            return 0;
+        return val1 > val2 ? 1 : -1
     }
 }

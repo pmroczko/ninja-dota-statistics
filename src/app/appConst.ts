@@ -4,4 +4,5 @@ export class AppConst {
     public static HERO_TYPE_RAW = "raw"
     public static HERO_TYPE_REL = "rel";
     public static HERO_TYPE_TOP = "top";
+    public static HERO_TYPE_PLAYER = "player";
 }

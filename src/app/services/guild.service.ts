@@ -20,6 +20,7 @@ export class GuildService {
   public HeroRawData: HeroEntity[] = [];
   public HeroRelData: HeroEntity[] = [];
   public HeroTopData: HeroEntity[] = [];
+  public HeroPlayerData: HeroEntity[] = [];
 
   private ApiUrl: string;
 
@@ -75,6 +76,19 @@ export class GuildService {
     return ret;
   }
 
+  private MapHeroPlayer(data): Array<any> {
+    return data.map(e => {
+      let ret = new HeroEntity();
+      ret.Player = e[0];
+      ret.Hero = e[1];
+      let score = e[2];
+      ret.Wins = score['wins'];
+      ret.Looses = score['looses'];
+      ret.WinRatio = CalcUtils.CalcWinRatio(ret.Wins, ret.Looses);
+      return ret;
+    })
+  }
+
   public ParseHeroData(data): void {
     this.HeroRawData = data['heroes_stats'].map(e => {
       return this.ParseSingleHeroEntity(e, 'common_player_raw');
@@ -85,6 +99,7 @@ export class GuildService {
     this.HeroTopData = data['heroes_stats'].map(e => {
       return this.ParseSingleHeroEntity(e, 'top_player');
     })
+    this.HeroPlayerData = this.MapHeroPlayer(data['players_stats']);
   }
 
   public GetRoleWr(): Observable<any> {

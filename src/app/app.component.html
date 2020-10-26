@@ -27,8 +27,9 @@
       </mat-menu>
       
       <!-- Heroes -->
-      <button mat-button [matMenuTriggerFor]="menuSynergy" >Heroes</button>
-      <mat-menu #menuSynergy="matMenu"  class="mat-menu-customized">
+      <button mat-button [matMenuTriggerFor]="menuHero" >Heroes</button>
+      <mat-menu #menuHero="matMenu"  class="mat-menu-customized">
+        <a mat-button [routerLink]="'/heroes/player'" routerLinkActive="menu-active">Per Player</a>
         <a mat-button [routerLink]="'/heroes/raw'" routerLinkActive="menu-active">Most Played Raw</a>
         <a mat-button [routerLink]="'/heroes/rel'" routerLinkActive="menu-active">Most Played Relatively</a>
         <a mat-button [routerLink]="'/heroes/top'" routerLinkActive="menu-active">Best Ratio</a>
