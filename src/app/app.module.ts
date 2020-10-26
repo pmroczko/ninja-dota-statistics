@@ -12,12 +12,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { DemoMaterialModule } from './material.module';
 import { AgGridModule } from 'ag-grid-angular';
 import { RoleSynergyComponent } from './components/role-synergy/role-synergy.component';
+import { HeroComponent } from './components/hero/hero.component';
 
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'roles_wr/:mode', component: RoleWrComponent },
   { path: 'roles_synergy/:mode', component: RoleSynergyComponent },
+  { path: 'heroes/:mode', component: HeroComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
 ]
 
@@ -26,7 +28,8 @@ const appRoutes: Routes = [
     AppComponent,
     HomeComponent,
     RoleWrComponent,
-    RoleSynergyComponent
+    RoleSynergyComponent,
+    HeroComponent
   ],
   imports: [
     RouterModule.forRoot(

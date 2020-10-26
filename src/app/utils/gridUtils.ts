@@ -1,3 +1,5 @@
+import { AppConst } from '../appConst';
+
 export class GridUtils {
 
     public static GetRoleColDef(): any {
@@ -20,10 +22,54 @@ export class GridUtils {
             })
         return columns;
     }
+
     public static GetRoleWrColumns(mode: string): Array<any> {
         let columns: Array<any> = [];
         this.UpdateModeColumns(columns, mode);
         this.AddOtherRoleColumns(columns);
+        return columns;
+    }
+
+    public static GetHeroColDef(mode: string): Array<any> {
+        let columns: Array<any> = [];
+        columns.push({
+            headerName: "Hero",
+            field: "Hero",
+            type: "text",
+            filter: 'agTextColumnFilter',
+            sortable: true
+        })
+        columns.push({
+            headerName: "Player",
+            field: "Player",
+            type: "text",
+            filter: 'agTextColumnFilter',
+            sortable: true
+        })
+        columns.push({
+            headerName: "Wins",
+            field: "Wins",
+            sortable: true
+        })
+        columns.push(
+            {
+                headerName: "Looses",
+                field: "Looses",
+                sortable: true
+            })
+        columns.push(
+            {
+                headerName: "Win Ratio",
+                field: "WinRatio",
+                sortable: true
+            })
+        if (mode == AppConst.HERO_TYPE_REL || mode == AppConst.HERO_TYPE_TOP) {
+            columns.push({
+                headerName: 'Factor',
+                field: "Factor",
+                sortable: true
+            })
+        }
         return columns;
     }
 

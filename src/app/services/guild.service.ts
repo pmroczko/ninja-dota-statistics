@@ -7,6 +7,7 @@ import { environment } from './../../environments/environment';
 import { RoleSynergyEntity } from '../models/roleSynergyEntity';
 import { CalcUtils } from '../utils/calcUtils';
 import { StringUtils } from '../utils/stringUtils';
+import { HeroEntity } from '../models/heroEntity';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,9 @@ export class GuildService {
   public GuildId = "unknown";
   public RoleWrData: RoleWrEntity[] = [];
   public RoleSynergyData: RoleSynergyEntity[] = [];
+  public HeroRawData: HeroEntity[] = [];
+  public HeroRelData: HeroEntity[] = [];
+  public HeroTopData: HeroEntity[] = [];
 
   private ApiUrl: string;
 
@@ -57,6 +61,32 @@ export class GuildService {
     })
   }
 
+  private ParseSingleHeroEntity(e, key): HeroEntity {
+    let ret: HeroEntity = new HeroEntity();
+    let subData = e[key];
+    ret.Hero = e['hero_name'];
+    ret.Player = subData[0];
+    ret.Wins = +subData[1]['wins'];
+    ret.Looses = +subData[1]['looses'];
+    ret.WinRatio = CalcUtils.CalcWinRatio(ret.Wins, ret.Looses);
+    if (subData[2]) {
+      ret.Factor = +subData[2];
+    }
+    return ret;
+  }
+
+  public ParseHeroData(data): void {
+    this.HeroRawData = data['heroes_stats'].map(e => {
+      return this.ParseSingleHeroEntity(e, 'common_player_raw');
+    })
+    this.HeroRelData = data['heroes_stats'].map(e => {
+      return this.ParseSingleHeroEntity(e, 'common_player_relative');
+    })
+    this.HeroTopData = data['heroes_stats'].map(e => {
+      return this.ParseSingleHeroEntity(e, 'top_player');
+    })
+  }
+
   public GetRoleWr(): Observable<any> {
     if (this.GuildId == 'unknown') {
       this.GuildId = AppConst.DEFAULT_GUILD_ID;
@@ -76,5 +106,12 @@ export class GuildService {
       this.GuildId = AppConst.DEFAULT_GUILD_ID;
     }
     return this.httpClient.get(`${this.ApiUrl}/roles_records`);
+  }
+
+  public GetHeroRecords(): Observable<any> {
+    if (this.GuildId == 'unknown') {
+      this.GuildId = AppConst.DEFAULT_GUILD_ID;
+    }
+    return this.httpClient.get(`${this.ApiUrl}/heroes_players_stats`);
   }
 }

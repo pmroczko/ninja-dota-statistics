@@ -16,6 +16,7 @@ export class RoleSynergyComponent implements OnInit {
   public Columns: Array<any>;
   public ColDef = GridUtils.GetRoleColDef();
   private Mode;
+
   constructor(private guildService: GuildService, private route: ActivatedRoute) {
     this.route.params.subscribe(params => {
       this.initGrid(params.mode);

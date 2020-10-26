@@ -2,3 +2,16 @@ GET /dotastats/guild/roles_wr/<guild_id> to jest to samo co poprzednie, tylko je
 POST /dotastats/guild/process/<guild_id> wrzuca gildie do kolejki do ściągnięcia danych i policzenia wszystkiego
 GET /guild/roles_synergy/<guild_id> ->  Vec<(Roles, double)>
 GET /guild/roles_records/<guild_id>
+
+pub struct RolesRecords {
+    pub best_single: Vec<(PlayerName, RoleName, WinRatio)>,
+    pub top3_carry_sup: [(PlayerName, PlayerName, WinRatio); 3],
+    pub best_fight_crew: (PlayerName, PlayerName, PlayerName, WinRatio),
+    pub best_nuking_squad: (PlayerName, PlayerName, WinRatio),
+}
+
+
+HeroStats dla każdego bohatera zawiera kolejno, 
+best: gracza z najlepszym wr na tym hero, 
+raw: gracza z największą ilością gier na tym bohaterze, i 
+rel: gracza którego ilość gier na tym bohaterze w porównaniu z jego ogólną ilością gier jest największa.
